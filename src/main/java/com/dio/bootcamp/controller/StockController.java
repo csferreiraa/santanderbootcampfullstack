@@ -28,7 +28,7 @@ public class StockController {
 
     @PutMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<StockDTO> update(@Valid @RequestBody StockDTO dto){
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(stockService.update(dto));
     }
 
     @GetMapping(produces = APPLICATION_JSON_VALUE)
