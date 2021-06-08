@@ -16,4 +16,5 @@ spring:
     hibernate:
       ddl-auto: none
 
-  spring.jpa.properties.hibernate.default_schema: public
+application:
+  description: Projeto criado para o bootcamp DIO - Santander

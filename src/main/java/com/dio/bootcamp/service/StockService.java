@@ -1,6 +1,7 @@
 package com.dio.bootcamp.service;
 
 import com.dio.bootcamp.exceptions.BusinessException;
+import com.dio.bootcamp.exceptions.NotFoundException;
 import com.dio.bootcamp.mapper.StockMapper;
 import com.dio.bootcamp.model.Stock;
 import com.dio.bootcamp.model.dto.StockDTO;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -47,6 +50,29 @@ public class StockService {
         Stock stock = stockMapper.toEntity(dto);
         stockRepository.save(stock);
         return stockMapper.toDto(stock);
+    }
+
+    @Transactional
+    public List<StockDTO> findAll() {
+        List<Stock> list = stockRepository.findAll();
+        return stockMapper.toDto(list);
+    }
+
+    @Transactional
+    public StockDTO findById(Long id) {
+        return stockRepository.findById(id).map(stockMapper::toDto).orElseThrow(NotFoundException::new);
+    }
+
+    @Transactional()
+    public StockDTO delete(Long id) {
+        StockDTO dto = this.findById(id);
+        stockRepository.deleteById(id);
+        return dto;
+    }
+
+    @Transactional()
+    public List<StockDTO> findByToday(){
+        return  stockRepository.findByToday(LocalDate.now()).map(stockMapper::toDto).orElseThrow(NotFoundException::new);
     }
 
 }
