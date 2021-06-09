@@ -12,7 +12,8 @@ spring:
   jpa:
     show-sql: true
     database-plataform: org.hibernate.dialect.PostgreSQLDialect
-    generate-ddl: true
-    open-in-view: false
+    generate-ddl: false
     hibernate:
       ddl-auto: none
+
+  spring.jpa.properties.hibernate.default_schema: public

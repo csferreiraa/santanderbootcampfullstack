@@ -1,7 +1,8 @@
 package com.dio.bootcamp.controller;
 
-import com.dio.bootcamp.controller.model.dto.StockDTO;
-import org.springframework.http.MediaType;
+import com.dio.bootcamp.model.dto.StockDTO;
+import com.dio.bootcamp.service.StockService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,16 +11,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping(value = "/stock")
 public class StockController {
 
+    @Autowired
+    private StockService stockService;
+
     @PostMapping(consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<StockDTO>save(@Valid @RequestBody StockDTO dto){
-        return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(stockService.save(dto));
 
     }
 

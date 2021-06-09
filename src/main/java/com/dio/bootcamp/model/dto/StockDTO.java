@@ -1,10 +1,9 @@
-package com.dio.bootcamp.controller.model.dto;
+package com.dio.bootcamp.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
